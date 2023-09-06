@@ -21,6 +21,7 @@ Cuotas: 3
 Total: $4784
 
 */
+
 void main() {
 
     char tarjetaElegida[]="";
@@ -35,7 +36,7 @@ void main() {
     }
     printf("\nSeleccione el medio de pago: 1-Efectivo, 2-Tarjeta de credito: ");
     scanf("%i", &opcionPago);
-    while (0 >= opcionPago >= 3) {
+    while (0 >= opcionPago || opcionPago >= 3) {
         printf("\nSeleccione un medio de pago valido: 1-Efectivo, 2-Tarjeta de credito: ");
         scanf("%i", opcionPago);
     }
@@ -69,19 +70,19 @@ void main() {
             scanf("%i", &opcionCuota);
         }
         if (opcionCuota == 1) {
-            printf("DNI: %i \nMedio de pago: Tarjeta de credito \nTarjeta: %s\nCuotas: 1 \nTotal: $4600\n", DNI, tarjetaElegida);
+            printf("\nDNI: %i \nMedio de pago: Tarjeta de credito \nTarjeta: %s\nCuotas: 1 \nTotal: $4600\n", DNI, tarjetaElegida);
             system("pause");
         }
         else if (opcionCuota == 2) {
-            printf("DNI: %i \nMedio de pago: Tarjeta de credito \nTarjeta: %s\nCuotas: 3 \nTotal: $4784\n", DNI, tarjetaElegida);
+            printf("\nDNI: %i \nMedio de pago: Tarjeta de credito \nTarjeta: %s\nCuotas: 3 \nTotal: $4784\n", DNI, tarjetaElegida);
             system("pause");
         }
         else if (opcionCuota == 3) {
-            printf("DNI: %i \nMedio de pago: Tarjeta de credito \nTarjeta: %s\nCuotas: 6 \nTotal: $4968\n", DNI, tarjetaElegida);
+            printf("\nDNI: %i \nMedio de pago: Tarjeta de credito \nTarjeta: %s\nCuotas: 6 \nTotal: $4968\n", DNI, tarjetaElegida);
             system("pause");
         }
         else {
-            printf("DNI: %i \nMedio de pago: Tarjeta de credito \nTarjeta: %s\nCuotas: 12 \nTotal: $4968\n", DNI, tarjetaElegida);
+            printf("\nDNI: %i \nMedio de pago: Tarjeta de credito \nTarjeta: %s\nCuotas: 12 \nTotal: $4968\n", DNI, tarjetaElegida);
             system("pause");
         }
     }
