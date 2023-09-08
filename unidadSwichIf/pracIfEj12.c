@@ -30,58 +30,72 @@ void main() {
 
     printf("Ingrese su DNI (entre 1000000 y 99999999): ");
     scanf("%i", &DNI);
-    while ((DNI < 1000000) || (DNI > 99999999)) {
+    while ((DNI < 1000000) || (DNI > 99999999)) 
+    {
         printf("\nIngrese un DNI valido: ");
-        scanf("%i", DNI);
+        scanf("%i", &DNI);
     }
     printf("\nSeleccione el medio de pago: 1-Efectivo, 2-Tarjeta de credito: ");
     scanf("%i", &opcionPago);
-    while (0 >= opcionPago || opcionPago >= 3) {
+    while (0 >= opcionPago || opcionPago >= 3) 
+    {
         printf("\nSeleccione un medio de pago valido: 1-Efectivo, 2-Tarjeta de credito: ");
-        scanf("%i", opcionPago);
+        scanf("%i", &opcionPago);
     }
-    if (opcionPago == 1) {
+    if (opcionPago == 1) 
+    {
         printf("\nDNI: %i \nMedio de pago: Efectivo \nTotal: $4600\n", DNI);
         system("pause");
     }
-    else {
+    else 
+    {
         printf("\nSeleccione tarjeta de credito: 1-Visa, 2-American Express, 3-Mercado Pago, 4-Cabal: ");
         scanf("%i", &opcionTarjeta);
-        while (0 >= opcionTarjeta || opcionTarjeta >= 5) {
+        while (0 >= opcionTarjeta || opcionTarjeta >= 5) 
+        {
             printf("\nSeleccione tarjeta de credito valida: 1-Visa, 2-American Express, 3-Mercado Pago, 4-Cabal: ");
-            scanf("%i", opcionTarjeta);
+            scanf("%i", &opcionTarjeta);
         }
-        if (opcionTarjeta == 1) {
+        if (opcionTarjeta == 1) 
+        {
             strcpy(tarjetaElegida, "Visa");
         }
-        else if (opcionTarjeta == 2) {
+        else if (opcionTarjeta == 2) 
+        {
             strcpy(tarjetaElegida, "American Express");
         }
-        else if (opcionTarjeta == 3) {
+        else if (opcionTarjeta == 3) 
+        {
             strcpy(tarjetaElegida, "Mercado Pago");
         }
-        else {
+        else 
+        {
             strcpy(tarjetaElegida, "Cabal");
         }
         printf("Seleccione cantidad de cuotas: 1- 1 cuota, 2- 3 cuotas, 3- 6 cuotas 4- 12 cuotas: ");
         scanf("%i", &opcionCuota);
-        while (0 >= opcionCuota || opcionCuota >= 5) {
+        while (0 >= opcionCuota || opcionCuota >= 5) 
+        {
             printf("Ingrese una cantidad de cuotas validas: 1- 1 cuota, 2- 3 cuotas, 3- 6 cuotas 4- 12 cuotas: ");
             scanf("%i", &opcionCuota);
         }
-        if (opcionCuota == 1) {
+        if (opcionCuota == 1) 
+        {
             printf("\nDNI: %i \nMedio de pago: Tarjeta de credito \nTarjeta: %s\nCuotas: 1 \nTotal: $4600\n", DNI, tarjetaElegida);
             system("pause");
         }
-        else if (opcionCuota == 2) {
+        else if (opcionCuota == 2) 
+        {
             printf("\nDNI: %i \nMedio de pago: Tarjeta de credito \nTarjeta: %s\nCuotas: 3 \nTotal: $4784\n", DNI, tarjetaElegida);
             system("pause");
         }
-        else if (opcionCuota == 3) {
+        else if (opcionCuota == 3) 
+        {
             printf("\nDNI: %i \nMedio de pago: Tarjeta de credito \nTarjeta: %s\nCuotas: 6 \nTotal: $4968\n", DNI, tarjetaElegida);
             system("pause");
         }
-        else {
+        else 
+        {
             printf("\nDNI: %i \nMedio de pago: Tarjeta de credito \nTarjeta: %s\nCuotas: 12 \nTotal: $4968\n", DNI, tarjetaElegida);
             system("pause");
         }
