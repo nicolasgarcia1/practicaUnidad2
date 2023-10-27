@@ -4,7 +4,7 @@
 
 /*
 Se desea realizar un programa que gestione el stock de un negocio de venta de
-electrodomésticos. Como máximo se permitirán cargar 100 electrodomésticos. De cada
+electrodomésticos. Como máximo se permitirán cargar 50 electrodomésticos. De cada
 electrodoméstico se conoce su código de barras, su descripción y una cantidad en stock.
 Se deberá presentar un menú con las siguientes opciones:
 1. Cargar productos.
@@ -12,7 +12,7 @@ Se deberá presentar un menú con las siguientes opciones:
 3. Mostrar productos sin stock.
 4. Listar productos.
 5. Salir.
-Donde, la opción 1 permite cargar los 100 electrodomésticos ingresando para cada uno: código
+Donde, la opción 1 permite cargar los 50 electrodomésticos ingresando para cada uno: código
 de barras, descripción y cantidad.
 La opción 2 debe pedir el código de barras del electrodoméstico al cual se desea cambiar el
 stock y la nueva cantidad. Si el código de barras ingresado no existe, informar la situación con
@@ -29,7 +29,7 @@ SOLO se saldrá de la aplicación si se selecciona la opción 5.
  struct electrodomestico
     {
         int codBarras;
-        char descripcion[100];
+        char descripcion[50];
         int cantStock;
     };
 
@@ -46,6 +46,7 @@ void checkDescripcion (char *descripcion);
 int cargaProductos(struct electrodomestico electrodomesticos[], int tam)
 {
     int opcion = 0;
+    int codigoBarras;
 
     system("cls");
     printf("**********CARGA DE PRODUCTOS**********\n\n");
@@ -55,20 +56,23 @@ int cargaProductos(struct electrodomestico electrodomesticos[], int tam)
         {
             printf("Producto %i\n", i+1);
             printf("Ingrese el codigo de barras: ");
-            scanf("%i", &electrodomesticos[i].codBarras);
-            checkCodigoBarras(&electrodomesticos[i].codBarras);
+            scanf("%i", &codigoBarras);
+            checkCodigoBarras(&codigoBarras);
 
-            printf("\nIngrese la descripcion del producto (hasta 100 caracteres): ");
-            scanf("%s", electrodomesticos[i].descripcion);
+            printf("\nIngrese la descripcion del producto (hasta 50 caracteres): ");
+            while (getchar() != '\n');  // Limpia el búfer de entrada
+            fgets(electrodomesticos[i].descripcion, 50, stdin);
             checkDescripcion(electrodomesticos[i].descripcion);
 
             printf("\nIngrese la cantidad: ");
             scanf("%i", &electrodomesticos[i].cantStock);
             while (electrodomesticos[i].cantStock < 0)
             {
-                printf("Ingrese una cantidad valida: ");
+                printf("Ingrese una cantidad válida: ");
                 scanf("%i", &electrodomesticos[i].cantStock);
             }
+            while (getchar() != '\n');  // Limpia el búfer de entrada
+
             system("cls");
 
             printf("Productos ingresados hasta ahora: %i\n", i+1);
@@ -76,6 +80,8 @@ int cargaProductos(struct electrodomestico electrodomesticos[], int tam)
                 printf("1-SI 2-NO\nDesea ingresar un nuevo producto?:\n");
                 scanf("%i", &opcion);
             } while (opcion != 1 && opcion != 2);
+            while (getchar() != '\n');  // Limpia el búfer de entrada
+
             system("cls");
 
             if (opcion == 2)
@@ -86,12 +92,13 @@ int cargaProductos(struct electrodomestico electrodomesticos[], int tam)
     }
 
     if (electrodomesticos[tam-1].codBarras != 0) // chequea que no se haya llenado el arreglo
-        {
-            printf("Se alcanzo el numero maximo de electrodomesticos.\n");
-            system("pause");
-            return 0;
-        }
+    {
+        printf("Se alcanzó el número máximo de electrodomésticos.\n");
+        system("pause");
+        return 0;
+    }
 }
+
 
 
 void modifStock(struct electrodomestico electrodomesticos[], int tam)
@@ -105,7 +112,7 @@ void modifStock(struct electrodomestico electrodomesticos[], int tam)
     {
         if (electrodomesticos[i].codBarras != 0)
         {
-            printf("Electrodomestico %i (%s)\nCodigo de barras: %i\n\n", i+1, electrodomesticos[i].descripcion, electrodomesticos[i].codBarras);
+            printf("Electrodomestico %i: %s\nCodigo de barras: %i\n\n", i+1, electrodomesticos[i].descripcion, electrodomesticos[i].codBarras);
             checkElectrodomesticoDisponible = 1;
         }
     }    
@@ -127,7 +134,7 @@ void modifStock(struct electrodomestico electrodomesticos[], int tam)
             if (electrodomesticos[j].codBarras == codigo)
             {
                 system("cls");
-                printf("Electrodomestico %i (%s)\nCodigo de barras: %i\nStock actual: %i\n\nIngrese el nuevo stock: ", j+1, electrodomesticos[j].descripcion, electrodomesticos[j].codBarras, electrodomesticos[j].cantStock);
+                printf("Electrodomestico %i: %s\nCodigo de barras: %i\nStock actual: %i\n\nIngrese el nuevo stock: ", j+1, electrodomesticos[j].descripcion, electrodomesticos[j].codBarras, electrodomesticos[j].cantStock);
                 scanf("%i", &nuevoStock);
 
                 electrodomesticos[j].cantStock = nuevoStock;
@@ -160,7 +167,7 @@ void sinStock(struct electrodomestico electrodomesticos[], int tam)
     {
         if (electrodomesticos[i].cantStock == 0 && electrodomesticos[i].codBarras != 0)
         {
-            printf("Electrodomestico %i (%s) SIN STOCK\n\n", i+1, electrodomesticos[i].descripcion);
+            printf("Electrodomestico %i: %s SIN STOCK\n\n", i+1, electrodomesticos[i].descripcion);
             checkProductoSinStock = 1;
         }
 
@@ -196,7 +203,7 @@ void muestraLista(struct electrodomestico electrodomesticos[], int tam)
     {
         if (electrodomesticos[i].codBarras != 0)
         {
-            printf("Electrodomestico %i (%s)\nCodigo de barras: %i\nCantidad en stock: %i\n\n\n", i+1, electrodomesticos[i].descripcion, electrodomesticos[i].codBarras, electrodomesticos[i].cantStock);
+            printf("Electrodomestico %i: %s\nCodigo de barras: %i\nCantidad en stock: %i\n\n\n", i+1, electrodomesticos[i].descripcion, electrodomesticos[i].codBarras, electrodomesticos[i].cantStock);
             checkProductosCargados = 1;
         }
     }
@@ -210,7 +217,8 @@ void muestraLista(struct electrodomestico electrodomesticos[], int tam)
 }
 
 
-void checkCodigoBarras(int *codigo) // chequea la longitud del codigo de barras y que no sea negativo
+void checkCodigoBarras(int *codigo) 
+// chequea la longitud del codigo de barras y que no sea negativo
 {
     while (*codigo > 99999999999999 || *codigo <= 0)
         {
@@ -220,12 +228,19 @@ void checkCodigoBarras(int *codigo) // chequea la longitud del codigo de barras 
 }
 
 
+
 void checkDescripcion(char *descripcion) // chequea la longitud de la descripcion
 {
-    while (strlen(descripcion) > 100)
+    while (strlen(descripcion) > 50)
     {
-        printf("Ingrese una descripcion valida (max 100 caracteres): ");
-        scanf("%s", descripcion);
+        printf("Ingrese una descripcion valida (max 50 caracteres): ");
+        while (getchar() != '\n');  // Limpia el búfer de entrada
+        fgets(descripcion, 50, stdin);
+    }
+
+    if (descripcion[strlen(descripcion)-1] == '\n')
+    {
+        descripcion[strlen(descripcion)-1] = '\0';
     }
 }
 
